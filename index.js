@@ -29,3 +29,7 @@ var port = process.env.PORT || 3001;
 http.listen(port, function(){
    console.log('listening in http://localhost:' + port);
 });
+
+app.get( '*', function(req,res){
+    res.status(200).send("Servidor listo :D!")
+});
