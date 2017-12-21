@@ -5,11 +5,12 @@ let usersConnected = 0;
  
 io.on('connect', (socket) => {
     usersConnected++;
-
+    console.log("Users connected->"+usersConnected)
     io.emit('user-connect', usersConnected);
     
     socket.on('disconnect', () => {
         usersConnected--;
+        console.log("Users connected->"+usersConnected)
         socket.broadcast.emit('user-disconnect', usersConnected);   
     });
   
