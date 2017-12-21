@@ -1,12 +1,16 @@
 let app = require('express')();
 let http = require('http').Server(app);
 let io = require('socket.io')(http);
+let usersConnected = 0;
  
 io.on('connect', (socket) => {
-    socket.broadcast.emit('user-connect');
+    usersConnected++;
 
+    io.emit('connect', usersConnected);
+    
     socket.on('disconnect', () => {
-        io.emit('disconnect');   
+        usersConnected--;
+        socket.broadcast.emit('disconnect', usersConnected);   
     });
   
     socket.on('add-message', (message) => {
