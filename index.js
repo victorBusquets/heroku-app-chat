@@ -3,8 +3,7 @@ let http = require('http').Server(app);
 let io = require('socket.io')(http);
  
 io.on('connect', (socket) => {
-
-    io.emit('user-connect');
+    socket.broadcast.emit('user-connect');
 
     socket.on('disconnect', () => {
         io.emit('disconnect');   
