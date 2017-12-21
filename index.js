@@ -6,11 +6,11 @@ let usersConnected = 0;
 io.on('connect', (socket) => {
     usersConnected++;
 
-    io.emit('connect', usersConnected);
+    io.emit('user-connect', usersConnected);
     
     socket.on('disconnect', () => {
         usersConnected--;
-        socket.broadcast.emit('disconnect', usersConnected);   
+        socket.broadcast.emit('user-disconnect', usersConnected);   
     });
   
     socket.on('add-message', (message) => {
